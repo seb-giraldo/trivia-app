@@ -18,7 +18,12 @@ app.use("/api/question", questionRoutes);
 app.use("/api/photo", photoRoutes);
 app.use("/api/hint", hintRoutes);
 
-const port = process.env.PORT || 3001;
-app.listen(port, () => {
-  console.log(`AI Trivia API running on http://localhost:${port}`);
-});
+// On Vercel the platform serves the exported app, so only listen when run directly.
+if (!process.env.VERCEL) {
+  const port = process.env.PORT || 3001;
+  app.listen(port, () => {
+    console.log(`AI Trivia API running on http://localhost:${port}`);
+  });
+}
+
+export default app;
